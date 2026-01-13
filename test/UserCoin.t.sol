@@ -26,7 +26,7 @@ contract UserCoinTest is Test {
         uint256 ethAmount = 0.7 ether;
 
         vm.prank(user);
-        (bool success, ) = address(coin).call{value: ethAmount}("");
+        (bool success,) = address(coin).call{value: ethAmount}("");
         require(success, "ETH transfer failed");
 
         assertEq(coin.balanceOf(user), ethAmount * coin.RATE());

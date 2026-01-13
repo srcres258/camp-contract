@@ -15,7 +15,7 @@ contract UserCoin is ERC20, Ownable {
     /// @notice 接收 ETH 并铸造等值的 UserCoin 给发送者
     receive() external payable {
         require(msg.value > 0, "Must send ETH to mint UserCoin");
-        uint256 tokensToMint = msg.value *  RATE;
+        uint256 tokensToMint = msg.value * RATE;
         _mint(msg.sender, tokensToMint);
     }
 
@@ -30,7 +30,7 @@ contract UserCoin is ERC20, Ownable {
     function withdraw() external onlyOwner {
         uint256 balance = address(this).balance;
         require(balance > 0, "No ETH to withdraw");
-        (bool success, ) = payable(msg.sender).call{value: balance}("");
+        (bool success,) = payable(msg.sender).call{value: balance}("");
         require(success, "Withdraw failed");
     }
 }
